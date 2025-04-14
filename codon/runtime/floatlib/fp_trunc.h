@@ -51,7 +51,11 @@ static const int dstSigBits = 23;
 
 #elif defined DST_HALF
 #ifdef COMPILER_RT_HAS_FLOAT16
-typedef _Float16 dst_t;
+  #if defined(__FLT16_MANT_DIG__)
+  typedef _Float16 dst_t;
+  #else
+  typedef uint16_t dst_t;
+  #endif
 #else
 typedef uint16_t dst_t;
 #endif
